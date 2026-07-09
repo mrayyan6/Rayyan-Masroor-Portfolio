@@ -40,7 +40,7 @@ export const projects = [
     stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase", "PostgreSQL"],
     type: "Web App",
     status: "Completed",
-    link: "https://khud-clothing.vercel.app/",
+    link: "www.khudclothes.com",
     github: "https://github.com/mrayyan6/Khud-Clothing",
   },
 ];
