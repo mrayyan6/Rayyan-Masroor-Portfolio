@@ -7,7 +7,7 @@ export const projects = [
     stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase", "PostgreSQL"],
     type: "Web App",
     status: "Completed",
-    link: "www.khudclothes.com",
+    link: "https://www.khudclothes.com",
     github: "https://github.com/khudclothes-spec/Khud-Clothing",
   },
   {
