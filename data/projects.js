@@ -1,14 +1,14 @@
 export const projects = [
   {
     id: 1,
-    title: "Lumberwiz",
+    title: "KHUD",
     description:
-      "Full-stack timber e-commerce store built with Next.js and Supabase. Features SSR for SEO, role-based auth (admin/customer), a Supabase-driven product catalog, interactive star-rating review system, custom Swiper.js carousel, and a full security audit addressing client-side gating, missing middleware, and session handling.",
-    stack: ["Next.js", "React", "Supabase", "PostgreSQL", "Tailwind CSS", "Swiper.js"],
+      "Production-ready full-stack clothing e-commerce platform. Features secure Supabase Auth, PostgreSQL with Row-Level Security, an admin dashboard for product/inventory/category management, Supabase Storage for product images, and a responsive shopping experience with filtering and cart functionality. Deployed on google with automated GitHub-based CI/CD.",
+    stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase", "PostgreSQL"],
     type: "Web App",
     status: "Completed",
-    link: "https://lumberwiz-2-0.vercel.app/",
-    github: "https://github.com/mrayyan6/lumberwiz-2.0",
+    link: "www.khudclothes.com",
+    github: "https://github.com/khudclothes-spec/Khud-Clothing",
   },
   {
     id: 2,
@@ -34,13 +34,14 @@ export const projects = [
   },
   {
     id: 4,
-    title: "KHUD",
+    title: "Lumberwiz",
     description:
-      "Production-ready full-stack clothing e-commerce platform. Features secure Supabase Auth, PostgreSQL with Row-Level Security, an admin dashboard for product/inventory/category management, Supabase Storage for product images, and a responsive shopping experience with filtering and cart functionality. Deployed on Vercel with automated GitHub-based CI/CD.",
-    stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase", "PostgreSQL"],
+    "Full-stack timber e-commerce store built with Next.js and Supabase. Features SSR for SEO, role-based auth (admin/customer), a Supabase-driven product catalog, interactive star-rating review system, custom Swiper.js carousel, and a full security audit addressing client-side gating, missing middleware, and session handling.",
+    stack: ["Next.js", "React", "Supabase", "PostgreSQL", "Tailwind CSS", "Swiper.js"],
     type: "Web App",
     status: "Completed",
-    link: "www.khudclothes.com",
-    github: "https://github.com/mrayyan6/Khud-Clothing",
+    link: "https://lumberwiz-2-0.vercel.app/",
+    github: "https://github.com/mrayyan6/lumberwiz-2.0",
+
   },
 ];
