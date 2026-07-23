@@ -3,7 +3,7 @@ export const projects = [
     id: 1,
     title: "KHUD",
     description:
-      "Production-ready full-stack clothing e-commerce platform. Features secure Supabase Auth, PostgreSQL with Row-Level Security, an admin dashboard for product/inventory/category management, Supabase Storage for product images, and a responsive shopping experience with filtering and cart functionality. Deployed on google with automated GitHub-based CI/CD.",
+      "Production-ready full-stack clothing e-commerce platform. Features secure Supabase Auth, PostgreSQL with Row-Level Security, an admin dashboard for product/inventory/category management, Supabase Storage for product images, and a responsive shopping experience with filtering and cart functionality. Deployed on google with automated GitHub-based CI/CD. Currently Undergoing a name change.",
     stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase", "PostgreSQL"],
     type: "Web App",
     status: "Completed",
