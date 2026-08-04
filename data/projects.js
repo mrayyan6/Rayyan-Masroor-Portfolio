@@ -29,8 +29,8 @@ export const projects = [
     stack: ["n8n", "OpenRouter", "API", "Google Sheets", "JavaScript", "Web Scrappers", "Serp API", "Google Maps Scrapper"],
     type: "AI Automation",
     status: "Completed",
-    link: null,
-    github: null,
+    link: "https://leads-website-alpha.vercel.app/",
+    github: "https://github.com/automationsquadteam-ux/leads-website",
   },
   {
     id: 4,
