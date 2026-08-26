@@ -1,6 +1,6 @@
 "use client";
 
-// Deterministic abstract art per project — generated gradient + halftone
+// Deterministic abstract art per project: generated gradient + halftone
 // grain instead of a screenshot, so every bento tile looks distinct without
 // needing real project imagery.
 const PALETTES = [

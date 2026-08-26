@@ -10,7 +10,7 @@ const techCount = new Set(projects.flatMap((p) => p.stack)).size;
 const stats = [
   { value: `${projects.length}`, label: "Projects Shipped" },
   { value: `${techCount}+`, label: "Technologies Used" },
-  { value: "2026", label: "Graduating BS CS" },
+  { value: "2027", label: "Graduating BS CS" },
 ];
 
 export default function Stats() {

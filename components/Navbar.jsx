@@ -50,7 +50,7 @@ export default function Navbar() {
       >
         <a
           href="#top"
-          aria-label="Muhammad Rayyan Masroor — home"
+          aria-label="Muhammad Rayyan Masroor, home"
           className="group flex h-9 w-9 shrink-0 items-center justify-center rounded-full p-[1.5px] transition-transform duration-200 hover:scale-110"
           style={{
             backgroundImage:

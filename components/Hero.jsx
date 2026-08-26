@@ -50,7 +50,7 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 mx-auto flex min-h-screen max-w-content flex-col items-center justify-center px-6 pb-24 pt-32 text-center sm:px-8">
-        <p className="blur-in eyebrow mb-8">Class of &apos;26</p>
+        <p className="blur-in eyebrow mb-8">Class of &apos;27</p>
 
         <h1 className="name-reveal mb-6 font-display text-6xl italic leading-[0.9] tracking-tight text-text-primary md:text-8xl lg:text-9xl">
           Muhammad Rayyan
@@ -68,7 +68,7 @@ export default function Hero() {
         </p>
 
         <p className="blur-in mb-12 max-w-md text-sm text-muted md:text-base">
-          I build production web apps and agentic AI workflows &mdash; turning
+          I build production web apps and AI agent workflows, turning
           real-world problems into shipped software, not demos that never
           leave localhost.
         </p>

@@ -5,11 +5,12 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const TOOLS = [
-  { name: "Next.js", note: "React framework" },
+  { name: "Next.js", note: "Full-stack React" },
+  { name: "React", note: "UI components" },
   { name: "Supabase", note: "Postgres, Auth, Storage" },
   { name: "n8n", note: "Workflow automation" },
   { name: "PostgreSQL", note: "Relational data" },
-  { name: "OpenRouter", note: "LLM API routing" },
+  { name: "OpenRouter", note: "Routing to AI agents" },
   { name: "Tailwind CSS", note: "Styling" },
 ];
 
@@ -99,8 +100,8 @@ export default function Toolbox() {
             What I <span className="font-display italic">build with</span>
           </h2>
           <p className="mx-auto mt-3 max-w-md text-sm text-muted sm:text-base">
-            The stack behind the projects &mdash; web apps on one side, agentic
-            automation on the other.
+            The stack behind the projects: web apps on one side, AI agents on
+            the other.
           </p>
         </div>
       </div>

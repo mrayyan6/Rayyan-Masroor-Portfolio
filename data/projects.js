@@ -9,6 +9,7 @@ export const projects = [
     status: "Completed",
     link: "https://khud-clothing-eight.vercel.app",
     github: "https://github.com/khudclothes-spec/Khud-Clothing",
+    image: "/projects/charmeem.png",
   },
   {
     id: 2,
@@ -20,6 +21,7 @@ export const projects = [
     status: "Completed",
     link: "https://anchor-builders.vercel.app/",
     github: "https://github.com/mrayyan6/anchor-builders",
+    image: "/projects/anchor.jpg",
   },
   {
     id: 3,
@@ -31,6 +33,7 @@ export const projects = [
     status: "Completed",
     link: "https://leads-website-alpha.vercel.app/",
     github: "https://github.com/automationsquadteam-ux/leads-website",
+    image: "/projects/lead-gen.jpeg",
   },
   {
     id: 4,
@@ -42,6 +45,6 @@ export const projects = [
     status: "Completed",
     link: "https://lumberwiz-2-0.vercel.app/",
     github: "https://github.com/mrayyan6/lumberwiz-2.0",
-
+    image: "/projects/lumberwiz.png",
   },
 ];

@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
 /**
- * Generative "signal network" backdrop — animated nodes drifting and
+ * Generative "signal network" backdrop: animated nodes drifting and
  * connecting with lines when in range, rendered on canvas and driven by
  * GSAP's ticker. Stands in for a background video without depending on
  * any external footage or streaming service.

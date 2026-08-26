@@ -1,9 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import ProjectArt from "./ProjectArt";
 
 export default function ProjectCard({ project, index, spanClass, aspectClass }) {
-  const { title, description, type, link, github } = project;
+  const { title, description, type, link, github, image } = project;
   const href = link || github;
 
   return (
@@ -14,7 +15,17 @@ export default function ProjectCard({ project, index, spanClass, aspectClass }) 
       className={`group relative block overflow-hidden rounded-3xl border border-stroke bg-surface ${spanClass} ${aspectClass}`}
     >
       <div className="absolute inset-0 transition-transform duration-500 group-hover:scale-105">
-        <ProjectArt index={index} />
+        {image ? (
+          <Image
+            src={image}
+            alt={`${title} preview`}
+            fill
+            sizes="(min-width: 768px) 60vw, 100vw"
+            className="object-cover object-top"
+          />
+        ) : (
+          <ProjectArt index={index} />
+        )}
       </div>
 
       <div className="absolute inset-0 bg-black/30" />
@@ -28,7 +39,7 @@ export default function ProjectCard({ project, index, spanClass, aspectClass }) 
       <div className="absolute inset-0 flex flex-col justify-end bg-bg/0 p-6 opacity-0 backdrop-blur-0 transition-all duration-300 group-hover:bg-bg/70 group-hover:opacity-100 group-hover:backdrop-blur-lg">
         <p className="mb-4 line-clamp-3 text-sm text-white/80">{description}</p>
         <span className="inline-flex w-fit items-center gap-2 rounded-full bg-white px-4 py-2 text-sm text-bg">
-          View &mdash; <span className="font-display italic">{title}</span> ↗
+          View <span className="font-display italic">{title}</span> ↗
         </span>
       </div>
     </a>
