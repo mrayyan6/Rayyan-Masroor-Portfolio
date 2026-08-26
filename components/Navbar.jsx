@@ -1,51 +1,29 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { EASE } from "./motion";
+import { motion } from "framer-motion";
 
 const links = [
-  { label: "About", href: "#about", id: "about" },
-  { label: "Projects", href: "#projects", id: "projects" },
-  { label: "Contact", href: "#contact", id: "contact" },
+  { label: "Home", href: "#top", id: "top" },
+  { label: "Work", href: "#work", id: "work" },
 ];
 
 const RESUME = "/Muhammad_Rayyan_Resume.pdf";
 
-function DownloadIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.75"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="h-4 w-4"
-      aria-hidden="true"
-    >
-      <path d="M12 3v12M7 10l5 5 5-5M5 21h14" />
-    </svg>
-  );
-}
-
 export default function Navbar() {
-  const reduce = useReducedMotion();
   const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState(false);
-  const [active, setActive] = useState("");
+  const [active, setActive] = useState("top");
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => setScrolled(window.scrollY > 100);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
-    const els = links
-      .map((l) => document.getElementById(l.id))
-      .filter(Boolean);
+    const ids = ["top", "work", "toolbox", "contact"];
+    const els = ids.map((id) => document.getElementById(id)).filter(Boolean);
     if (els.length === 0) return;
     const visible = new Set();
     const obs = new IntersectionObserver(
@@ -54,8 +32,8 @@ export default function Navbar() {
           if (e.isIntersecting) visible.add(e.target.id);
           else visible.delete(e.target.id);
         });
-        const current = links.find((l) => visible.has(l.id));
-        setActive(current ? current.id : "");
+        const current = ids.find((id) => visible.has(id));
+        if (current) setActive(current);
       },
       { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
     );
@@ -64,120 +42,76 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header
-      className={`sticky top-0 z-50 border-b bg-background/85 backdrop-blur transition-colors duration-300 ${
-        scrolled ? "border-border" : "border-transparent"
-      }`}
-    >
-      <nav className="mx-auto flex max-w-content items-center justify-between px-6 py-4 sm:px-8">
+    <div className="fixed left-0 right-0 top-0 z-50 flex justify-center px-4 pt-4 md:pt-6">
+      <nav
+        className={`inline-flex items-center rounded-full border border-white/10 bg-surface/90 px-2 py-2 backdrop-blur-md transition-shadow duration-300 ${
+          scrolled ? "shadow-md shadow-black/10" : ""
+        }`}
+      >
         <a
           href="#top"
-          className="border-l-2 border-accent pl-2.5 text-sm font-semibold tracking-tight text-primary sm:text-[15px]"
+          aria-label="Muhammad Rayyan Masroor — home"
+          className="group flex h-9 w-9 shrink-0 items-center justify-center rounded-full p-[1.5px] transition-transform duration-200 hover:scale-110"
+          style={{
+            backgroundImage:
+              "linear-gradient(90deg, #89AACC 0%, #4E85BF 100%)",
+          }}
         >
-          Muhammad Rayyan Masroor
+          <span className="flex h-full w-full items-center justify-center rounded-full bg-bg font-display text-[13px] italic text-text-primary transition-[background-image] duration-200 group-hover:[background-image:linear-gradient(270deg,#89AACC_0%,#4E85BF_100%)]">
+            RM
+          </span>
         </a>
 
-        <div className="hidden items-center gap-8 md:flex">
-          <ul className="flex items-center gap-8">
-            {links.map((link) => {
-              const isActive = active === link.id;
-              return (
-                <li key={link.href} className="relative">
-                  <a
-                    href={link.href}
-                    className={`text-sm transition-colors ${
-                      isActive
-                        ? "font-medium text-primary"
-                        : "text-secondary hover:text-primary"
-                    }`}
-                  >
-                    {link.label}
-                  </a>
-                  {isActive && (
-                    <motion.span
-                      layoutId="nav-underline"
-                      className="absolute -bottom-1.5 left-0 right-0 h-0.5 rounded-full bg-accent"
-                      transition={{ type: "tween", duration: 0.3, ease: EASE }}
-                    />
-                  )}
-                </li>
-              );
-            })}
-          </ul>
-          <a
-            href={RESUME}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-md border border-border px-3.5 py-1.5 text-sm font-medium text-accent transition-colors hover:border-accent hover:bg-accent/[0.04]"
-          >
-            <DownloadIcon />
-            Resume
-          </a>
-        </div>
+        <span className="mx-1 hidden h-5 w-px bg-stroke sm:block" aria-hidden="true" />
 
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-label="Toggle menu"
-          aria-expanded={open}
-          className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border text-primary transition-colors hover:bg-surface md:hidden"
-        >
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.75"
-            strokeLinecap="round"
-            className="h-5 w-5"
-            aria-hidden="true"
-          >
-            {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
-          </svg>
-        </button>
-      </nav>
-
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            key="mobile-menu"
-            initial={reduce ? { opacity: 0 } : { opacity: 0, height: 0 }}
-            animate={reduce ? { opacity: 1 } : { opacity: 1, height: "auto" }}
-            exit={reduce ? { opacity: 0 } : { opacity: 0, height: 0 }}
-            transition={{ duration: 0.25, ease: EASE }}
-            className="overflow-hidden border-t border-border bg-background md:hidden"
-          >
-            <ul className="mx-auto flex max-w-content flex-col px-6 py-2">
-              {links.map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    onClick={() => setOpen(false)}
-                    className={`block py-2.5 text-sm transition-colors ${
-                      active === link.id
-                        ? "font-medium text-primary"
-                        : "text-secondary hover:text-primary"
-                    }`}
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-              <li className="py-2.5">
+        <ul className="flex items-center gap-1">
+          {links.map((link) => {
+            const isActive = active === link.id;
+            return (
+              <li key={link.href}>
                 <a
-                  href={RESUME}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setOpen(false)}
-                  className="inline-flex items-center gap-2 text-sm font-medium text-accent"
+                  href={link.href}
+                  className={`rounded-full px-3 py-1.5 text-xs transition-colors sm:px-4 sm:py-2 sm:text-sm ${
+                    isActive
+                      ? "bg-stroke/50 text-text-primary"
+                      : "text-muted hover:bg-stroke/50 hover:text-text-primary"
+                  }`}
                 >
-                  <DownloadIcon />
-                  Resume
+                  {link.label}
                 </a>
               </li>
-            </ul>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </header>
+            );
+          })}
+          <li>
+            <a
+              href={RESUME}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full px-3 py-1.5 text-xs text-muted transition-colors hover:bg-stroke/50 hover:text-text-primary sm:px-4 sm:py-2 sm:text-sm"
+            >
+              Resume
+            </a>
+          </li>
+        </ul>
+
+        <span className="mx-1 hidden h-5 w-px bg-stroke sm:block" aria-hidden="true" />
+
+        <a href="#contact" className="group relative rounded-full">
+          <span
+            className="absolute rounded-full opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+            style={{
+              inset: "-2px",
+              backgroundImage:
+                "linear-gradient(90deg, #89AACC 0%, #4E85BF 100%)",
+            }}
+            aria-hidden="true"
+          />
+          <span className="relative flex items-center gap-1 rounded-full bg-surface px-3 py-1.5 text-xs text-text-primary backdrop-blur-md sm:px-4 sm:py-2 sm:text-sm">
+            Say hi
+            <motion.span aria-hidden="true">↗</motion.span>
+          </span>
+        </a>
+      </nav>
+    </div>
   );
 }

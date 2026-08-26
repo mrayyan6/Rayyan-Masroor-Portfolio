@@ -1,143 +1,133 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
-import { EASE } from "./motion";
-import HeroBackdrop from "./HeroBackdrop";
+import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import NetworkCanvas from "./NetworkCanvas";
 
-const meta = [
-  { label: "Based in", value: "Islamabad, Pakistan" },
-  { label: "Focus", value: "Applied AI · Agentic Systems" },
-  { label: "Studying", value: "BS Computer Science · Final Year" },
-];
-
+const ROLES = ["Full-Stack Dev", "Automation Engineer", "CS Student", "Builder"];
 const RESUME = "/Muhammad_Rayyan_Resume.pdf";
 
 export default function Hero() {
-  const reduce = useReducedMotion();
+  const [roleIndex, setRoleIndex] = useState(0);
+  const rootRef = useRef(null);
 
-  const container = {
-    hidden: {},
-    show: {
-      transition: { staggerChildren: reduce ? 0 : 0.08, delayChildren: 0.08 },
-    },
-  };
-  const item = {
-    hidden: reduce ? { opacity: 0 } : { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
-  };
-  const nameGroup = { hidden: {}, show: {} };
-  const bar = {
-    hidden: reduce ? { opacity: 0 } : { scaleY: 0 },
-    show: {
-      opacity: 1,
-      scaleY: 1,
-      transition: { duration: 0.7, ease: EASE },
-    },
-  };
-  const name = {
-    hidden: reduce ? { opacity: 0 } : { opacity: 0, x: -24 },
-    show: { opacity: 1, x: 0, transition: { duration: 0.7, ease: EASE } },
-  };
+  useEffect(() => {
+    const id = setInterval(() => {
+      setRoleIndex((i) => (i + 1) % ROLES.length);
+    }, 2000);
+    return () => clearInterval(id);
+  }, []);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+      tl.fromTo(
+        ".name-reveal",
+        { opacity: 0, y: 50 },
+        { opacity: 1, y: 0, duration: 1.2, delay: 0.1 }
+      ).fromTo(
+        ".blur-in",
+        { opacity: 0, filter: "blur(10px)", y: 20 },
+        {
+          opacity: 1,
+          filter: "blur(0px)",
+          y: 0,
+          duration: 1,
+          stagger: 0.1,
+          delay: -0.9,
+        }
+      );
+    }, rootRef);
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section id="top" className="relative isolate overflow-hidden">
-      <HeroBackdrop />
-      <div className="relative z-10 mx-auto max-w-content px-6 pb-20 pt-20 sm:px-8 sm:pb-32 sm:pt-28">
-        <motion.div className="reveal" variants={container} initial="hidden" animate="show">
-        <motion.p variants={item} className="reveal-child eyebrow">
-          Aspiring Full-Stack Developer &amp; AI Automation Engineer
-        </motion.p>
+    <section id="top" ref={rootRef} className="relative isolate overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        <NetworkCanvas />
+        <div className="absolute inset-0 bg-black/20" />
+        <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-bg to-transparent" />
+      </div>
 
-        <motion.div variants={nameGroup} className="relative mt-5 pl-6">
-          <motion.span
-            aria-hidden="true"
-            variants={bar}
-            style={{ transformOrigin: "top" }}
-            className="reveal-child absolute inset-y-1 left-0 w-[3px] rounded-full bg-accent"
-          />
-          <motion.h1
-            variants={name}
-            className="reveal-child text-[36px] font-bold leading-[1.05] tracking-[-0.02em] text-primary sm:text-[56px]"
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-content flex-col items-center justify-center px-6 pb-24 pt-32 text-center sm:px-8">
+        <p className="blur-in eyebrow mb-8">Class of &apos;26</p>
+
+        <h1 className="name-reveal mb-6 font-display text-6xl italic leading-[0.9] tracking-tight text-text-primary md:text-8xl lg:text-9xl">
+          Muhammad Rayyan
+        </h1>
+
+        <p className="blur-in mb-6 text-lg text-muted md:text-xl">
+          A{" "}
+          <span
+            key={roleIndex}
+            className="inline-block animate-role-fade-in font-display italic text-text-primary"
           >
-            Muhammad Rayyan
-            <br /> Masroor
-          </motion.h1>
-        </motion.div>
+            {ROLES[roleIndex]}
+          </span>{" "}
+          based in Islamabad.
+        </p>
 
-        <motion.p
-          variants={item}
-          className="reveal-child mt-6 text-lg font-medium text-primary sm:text-xl"
-        >
-          Full-Stack Developer <span className="text-secondary">&amp;</span> AI
-          Automation Engineer
-        </motion.p>
+        <p className="blur-in mb-12 max-w-md text-sm text-muted md:text-base">
+          I build production web apps and agentic AI workflows &mdash; turning
+          real-world problems into shipped software, not demos that never
+          leave localhost.
+        </p>
 
-        <motion.p
-          variants={item}
-          className="reveal-child mt-4 max-w-2xl text-base leading-[1.75] text-body"
-        >
-          I build production web apps and agentic workflows. I&apos;m a
-          final-year CS student turning real-world problems into shipped
-          software.
-        </motion.p>
-
-        <motion.div variants={item} className="reveal-child mt-8 flex flex-wrap items-center gap-x-5 gap-y-3">
+        <div className="blur-in inline-flex flex-wrap items-center justify-center gap-4">
           <a
-            href="#projects"
-            className="inline-flex items-center justify-center rounded-md bg-[#2563EB] px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[#1D4ED8]"
+            href="#work"
+            className="group relative overflow-hidden rounded-full bg-text-primary px-7 py-3.5 text-sm text-bg transition-transform hover:scale-105"
           >
-            View Projects
+            <span className="relative z-10 transition-colors group-hover:text-text-primary">
+              See Work
+            </span>
+            <span
+              className="absolute inset-0 z-0 scale-y-0 rounded-full bg-bg transition-transform duration-300 group-hover:scale-y-100"
+              aria-hidden="true"
+            />
+            <span
+              className="pointer-events-none absolute rounded-full opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              style={{
+                inset: "-2px",
+                zIndex: -1,
+                backgroundImage:
+                  "linear-gradient(90deg, #89AACC 0%, #4E85BF 100%)",
+              }}
+              aria-hidden="true"
+            />
           </a>
+
+          <a
+            href="#contact"
+            className="group relative rounded-full border-2 border-stroke bg-bg px-7 py-3.5 text-sm text-text-primary transition-transform hover:scale-105 hover:border-transparent"
+          >
+            Reach out
+            <span
+              className="pointer-events-none absolute inset-0 -z-10 rounded-full opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              style={{
+                backgroundImage:
+                  "linear-gradient(90deg, #89AACC 0%, #4E85BF 100%)",
+              }}
+              aria-hidden="true"
+            />
+          </a>
+
           <a
             href={RESUME}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-md border border-border px-5 py-2.5 text-sm font-medium text-accent transition-colors hover:border-accent hover:bg-accent/[0.04]"
+            className="text-sm text-muted transition-colors hover:text-text-primary"
           >
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.75"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="h-4 w-4"
-              aria-hidden="true"
-            >
-              <path d="M12 3v12M7 10l5 5 5-5M5 21h14" />
-            </svg>
-            Download Résumé
+            Download résumé ↓
           </a>
-          <a
-            href="#contact"
-            className="group inline-flex items-center gap-1.5 text-sm font-medium text-primary transition-colors hover:text-accent"
-          >
-            Contact
-            <span className="transition-transform group-hover:translate-x-0.5" aria-hidden="true">
-              →
-            </span>
-          </a>
-        </motion.div>
+        </div>
+      </div>
 
-        <motion.dl
-          variants={item}
-          className="reveal-child mt-14 grid max-w-2xl grid-cols-1 border-t border-border sm:grid-cols-3"
-        >
-          {meta.map((m, i) => (
-            <div
-              key={m.label}
-              className={`py-4 sm:px-5 sm:py-5 ${
-                i === 0 ? "sm:pl-0" : "border-t border-border sm:border-l sm:border-t-0"
-              }`}
-            >
-              <dt className="font-mono text-[11px] uppercase tracking-wider text-secondary">
-                {m.label}
-              </dt>
-              <dd className="mt-1 text-sm font-medium text-primary">{m.value}</dd>
-            </div>
-          ))}
-        </motion.dl>
-        </motion.div>
+      <div className="absolute inset-x-0 bottom-8 z-10 flex flex-col items-center gap-3">
+        <span className="eyebrow tracking-[0.2em]">Scroll</span>
+        <div className="relative h-10 w-px overflow-hidden bg-stroke">
+          <span className="absolute inset-x-0 top-0 h-1/2 animate-scroll-down bg-text-primary" />
+        </div>
       </div>
     </section>
   );
