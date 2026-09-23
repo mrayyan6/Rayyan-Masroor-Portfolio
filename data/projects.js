@@ -93,6 +93,6 @@ export const projects = [
     status: "Field Testing",
     link: "https://ru-translator.pages.dev/",
     github: "https://github.com/mrayyan6/ru-translator",
-    image: null,
+    image: "/projects/translator.png",
   },
 ];
