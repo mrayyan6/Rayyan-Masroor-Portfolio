@@ -5,13 +5,22 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const TOOLS = [
+  { name: "Python", note: "ML and data pipelines" },
+  { name: "TypeScript", note: "Typed web apps" },
+  { name: "JavaScript", note: "UI and in-browser models" },
   { name: "Next.js", note: "Full-stack React" },
   { name: "React", note: "UI components" },
+  { name: "Node.js", note: "Scripts and data imports" },
   { name: "Supabase", note: "Postgres, Auth, Storage" },
-  { name: "n8n", note: "Workflow automation" },
   { name: "PostgreSQL", note: "Relational data" },
-  { name: "OpenRouter", note: "Routing to AI agents" },
   { name: "Tailwind CSS", note: "Styling" },
+  { name: "scikit-learn", note: "Regression, clustering, PCA" },
+  { name: "XGBoost", note: "Gradient-boosted trees" },
+  { name: "pandas", note: "Data wrangling" },
+  { name: "Transformers.js", note: "AI models in the browser" },
+  { name: "ONNX Runtime", note: "On-device inference" },
+  { name: "Whisper", note: "Speech recognition" },
+  { name: "n8n", note: "Workflow automation" },
 ];
 
 const COL_A = TOOLS.filter((_, i) => i % 2 === 0);
@@ -20,7 +29,7 @@ const COL_B = TOOLS.filter((_, i) => i % 2 === 1);
 function ToolCard({ tool, rotate }) {
   return (
     <div
-      className="flex aspect-square w-full max-w-[320px] flex-col justify-between rounded-2xl border border-stroke bg-surface p-6 shadow-card transition-transform duration-300 hover:scale-[1.03]"
+      className="flex aspect-square w-full max-w-[320px] flex-col justify-between rounded-2xl border border-stroke bg-surface p-4 shadow-card transition-transform duration-300 hover:scale-[1.03] sm:p-6"
       style={{ transform: `rotate(${rotate}deg)` }}
     >
       <span
@@ -31,7 +40,7 @@ function ToolCard({ tool, rotate }) {
         aria-hidden="true"
       />
       <div>
-        <p className="font-display text-2xl italic text-text-primary">{tool.name}</p>
+        <p className="break-words font-display text-lg italic text-text-primary sm:text-2xl">{tool.name}</p>
         <p className="mt-1 text-xs text-muted">{tool.note}</p>
       </div>
     </div>
@@ -88,7 +97,7 @@ export default function Toolbox() {
   }, []);
 
   return (
-    <section id="toolbox" ref={sectionRef} className="relative min-h-[220vh] bg-bg">
+    <section id="toolbox" ref={sectionRef} className="relative bg-bg">
       <div ref={contentRef} className="relative z-10 flex h-screen items-center justify-center">
         <div className="mx-auto max-w-content px-6 text-center">
           <div className="mb-4 flex items-center justify-center gap-3">
@@ -100,13 +109,14 @@ export default function Toolbox() {
             What I <span className="font-display italic">build with</span>
           </h2>
           <p className="mx-auto mt-3 max-w-md text-sm text-muted sm:text-base">
-            The stack behind the projects: web apps on one side, AI agents on
-            the other.
+            The stack behind the projects: web apps, machine learning and
+            on-device AI.
           </p>
         </div>
       </div>
 
-      <div className="absolute inset-0 z-20 flex items-center justify-center overflow-hidden">
+      {/* In flow, pulled up over the pinned heading, so the section grows with the tool list */}
+      <div className="relative z-20 -mt-[100vh] overflow-hidden py-[35vh]">
         <div className="mx-auto grid w-full max-w-[1400px] grid-cols-2 gap-12 px-6 md:gap-40">
           <div ref={colARef} className="flex flex-col items-start gap-12">
             {COL_A.map((tool, i) => (
