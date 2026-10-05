@@ -1,3 +1,5 @@
+// make all of the descriptions below in simple english, add the details and those things in commenst
+
 export const projects = [
   {
     id: 1,
@@ -19,8 +21,8 @@ export const projects = [
     stack: ["Next.js", "React", "Supabase", "PostgreSQL", "Tailwind CSS", "Node.js"],
     type: "Web App",
     status: "Completed",
-    link: "https://anchor-builders.vercel.app/",
-    github: "https://github.com/mrayyan6/anchor-builders",
+    link: "https://www.anchorassociatesandbuilders.com/",
+    github: "https://github.com/anchorassociatesbuilder-ai/anchor-builders",
     image: "/projects/anchor.jpg",
   },
   {
@@ -51,7 +53,7 @@ export const projects = [
     id: 5,
     title: "Match Outcome Predictor",
     description:
-      "Predicts home win, draw or away win for Premier League and La Liga fixtures from recent form, Elo ratings, home advantage and head-to-head record. A leakage-free feature pipeline (verified by tests) feeds balanced XGBoost and Random Forest models with Platt and isotonic calibration, reaching 52% accuracy on an unseen La Liga season against 54% for the bookmakers. The static site runs the exported trees in the browser with live fixture odds and form sliders, and retrains daily from a scheduled refresh.",
+      " Hobby Project that predicts football match outcomes for Premier League and La Liga fixtures from recent form, Elo ratings, home advantage and head-to-head record. A leakage-free feature pipeline (verified by tests) feeds balanced XGBoost and Random Forest models with Platt and isotonic calibration, reaching 52% accuracy on an unseen La Liga season against 54% for the bookmakers. The static site runs the exported trees in the browser with live fixture odds and form sliders, and retrains daily from a scheduled refresh.",
     stack: ["Python", "XGBoost", "scikit-learn", "pandas", "JavaScript", "Vercel"],
     type: "Machine Learning",
     status: "Completed",
