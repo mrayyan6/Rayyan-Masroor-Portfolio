@@ -53,7 +53,7 @@ export const projects = [
     id: 5,
     title: "Match Outcome Predictor",
     description:
-      " Hobby Project that predicts football match outcomes for Premier League and La Liga fixtures from recent form, Elo ratings, home advantage and head-to-head record. A leakage-free feature pipeline (verified by tests) feeds balanced XGBoost and Random Forest models with Platt and isotonic calibration, reaching 52% accuracy on an unseen La Liga season against 54% for the bookmakers. The static site runs the exported trees in the browser with live fixture odds and form sliders, and retrains daily from a scheduled refresh.",
+      " Hobby Project that predicts football match outcomes for Premier League and La Liga fixtures from recent form, Elo ratings, home advantage and head-to-head record.",
     stack: ["Python", "XGBoost", "scikit-learn", "pandas", "JavaScript", "Vercel"],
     type: "Machine Learning",
     status: "Completed",
@@ -65,7 +65,7 @@ export const projects = [
     id: 6,
     title: "Player Similarity Scout",
     description:
-      "Finds each Premier League and La Liga player's closest statistical twins from 14 per-90 stats using standardised features and cosine similarity within position groups. K-Means clustering (K chosen with silhouette and inertia analysis) sorts 800+ players into eight named playing-style archetypes, and PCA projects them onto an interactive style map. The static site offers player search, radar chart comparisons and archetype cards, refreshed weekly by a scheduled pipeline.",
+      "Finds each Premier League and La Liga player's closest statistical twins.",
     stack: ["Python", "scikit-learn", "pandas", "NumPy", "JavaScript", "Vercel"],
     type: "Machine Learning",
     status: "Completed",
@@ -77,7 +77,7 @@ export const projects = [
     id: 7,
     title: "Transfer Value Predictor",
     description:
-      "Estimates Premier League and La Liga players' market value from their season stats and flags who the market over or undervalues. Linear Regression and Random Forest models on log value, judged with out-of-fold predictions from 5-fold cross validation (R² 0.79). A fuzzy name-matching pipeline joins Sofascore stats to Transfermarkt values for 726 of 727 players. The site runs the models in the browser with what-if sliders, a build-your-own player tool and a mispricing leaderboard.",
+      "Estimates Premier League and La Liga players' market value from their season stats and flags who the market over or undervalues.",
     stack: ["Python", "scikit-learn", "pandas", "RapidFuzz", "JavaScript", "Vercel"],
     type: "Machine Learning",
     status: "Completed",
@@ -89,7 +89,7 @@ export const projects = [
     id: 8,
     title: "Offline Voice Translator",
     description:
-      "English to Russian (and back) voice translator that runs entirely on the phone, built as an installable PWA for iOS and Android. Speech recognition (Whisper), OPUS-MT translation and speech output all run on-device through Transformers.js and ONNX Runtime WASM, so it works in Airplane Mode and no audio leaves the device. Includes a hallucination gate for Whisper, resumable model downloads stored in IndexedDB, and cross-origin isolation for multi-threaded WASM on Cloudflare Pages.",
+      "English to Russian (and back) voice translator that runs entirely on the phone, built as an installable PWA for iOS and Android.",
     stack: ["TypeScript", "React", "Vite", "Transformers.js", "ONNX Runtime", "PWA", "Cloudflare Pages"],
     type: "On-Device AI",
     status: "Field Testing",
