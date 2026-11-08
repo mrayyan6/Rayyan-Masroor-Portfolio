@@ -4,8 +4,8 @@
 - Next.js 14 portfolio. Sections in app/page.js: Hero, Projects, Toolbox, Stats, GithubContributions, then Contact.
 
 ## Recent changes
-- Added components/GithubContributions.jsx: contribution graph for GitHub user `mrayyan6`, placed after Stats and before Contact. Client-side fetch from the public API https://github-contributions-api.jogruber.de (no token needed), drawn with Tailwind and the site's blue accent. Has loading skeleton and error fallback.
+- components/GithubContributions.jsx: GitHub-style contribution panel for `mrayyan6` (green GitHub dark palette, month labels on top, Mon/Wed/Fri on the left, hover tooltips, Less/More legend, full-width cells). Data from public API jogruber.de (client fetch). Placed after Stats, before Contact.
 
 ## Open questions
-- Not yet checked in a browser (build/visual check pending).
+- Logged-out and API count is 375; owner logged-in view shows 520. Gap is private contributions: needs "Private contributions" enabled in GitHub Contribution settings (user action). Whole panel now links to the GitHub profile in a new tab.
 - Depends on a third-party API staying up; fallback text links to the GitHub profile if it fails.
