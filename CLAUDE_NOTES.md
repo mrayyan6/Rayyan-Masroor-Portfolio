@@ -17,6 +17,6 @@
 ## Resume auto sync
 - Source of truth: `C:\Users\rayya\OneDrive - FAST National University\RAYYAN MASROOR\stuff\Muhammad_Rayyan Resume.pdf`. Site serves `public/Muhammad_Rayyan_Resume.pdf`.
 - `scripts/sync-resume.ps1` copies it over if the file hash changed, commits only that file ("updated resume") and pushes to main. Skips if not on main.
-- Windows scheduled task `PortfolioResumeSync` runs it every 10 minutes (needs the PC on and logged in). Log: `%LOCALAPPDATA%\portfolio-resume-sync.log`.
+- Windows scheduled task `PortfolioResumeSync` runs it daily at 12:00 (catches up if the PC was off). Launched via `conhost --headless` so no console window flashes. Log: `%LOCALAPPDATA%portfolio-resume-sync.log`.
 - Run by hand: `powershell -File scripts/sync-resume.ps1`. Remove: `Unregister-ScheduledTask PortfolioResumeSync`.
 - First sync done 2026-11-08 (pushed 0f0b12a).
