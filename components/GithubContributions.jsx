@@ -2,20 +2,51 @@ import GithubContributionsPanel from "@/components/GithubContributionsPanel";
 import snapshot from "@/data/contributions.json";
 
 const USERNAME = "mrayyan6";
-const API = `https://github-contributions-api.jogruber.de/v4/${USERNAME}?y=last`;
+const REVALIDATE = 3600; // seconds
+const GITHUB_URL = `https://github.com/users/${USERNAME}/contributions`;
+const API_URL = `https://github-contributions-api.jogruber.de/v4/${USERNAME}?y=last`;
 
-// Fetched on the server and cached for 6 hours, so visitors never wait on (or get blocked
-// from) the third party API. If the API is down, the committed snapshot is shown instead.
-async function loadContributions() {
-  try {
-    const res = await fetch(API, { next: { revalidate: 21600 }, signal: AbortSignal.timeout(30000) });
-    if (!res.ok) throw new Error(`status ${res.status}`);
-    const json = await res.json();
-    if (!json?.contributions?.length) throw new Error("empty");
-    return json;
-  } catch {
-    return snapshot;
+// Primary source: GitHub's own public contributions graph, so the numbers match the profile exactly.
+async function fromGithub() {
+  const res = await fetch(GITHUB_URL, { next: { revalidate: REVALIDATE }, signal: AbortSignal.timeout(20000) });
+  if (!res.ok) throw new Error(`github ${res.status}`);
+  const html = await res.text();
+
+  const cells = {};
+  for (const m of html.matchAll(/data-date="([\d-]+)" id="(contribution-day-component-[\d-]+)" data-level="(\d)"/g)) {
+    cells[m[2]] = { date: m[1], level: Number(m[3]) };
   }
+  const contributions = [];
+  for (const m of html.matchAll(/for="(contribution-day-component-[\d-]+)"[^>]*>\s*([^<]*)</g)) {
+    const cell = cells[m[1]];
+    if (!cell) continue;
+    const n = m[2].match(/^(\d+) contribution/);
+    contributions.push({ ...cell, count: n ? Number(n[1]) : 0 });
+  }
+  contributions.sort((a, b) => a.date.localeCompare(b.date));
+  if (contributions.length < 300) throw new Error("github parse failed");
+  const lastYear = contributions.reduce((sum, d) => sum + d.count, 0);
+  return { total: { lastYear }, contributions };
+}
+
+// Fallback: third party API (can lag GitHub by a few hours).
+async function fromApi() {
+  const res = await fetch(API_URL, { next: { revalidate: REVALIDATE }, signal: AbortSignal.timeout(30000) });
+  if (!res.ok) throw new Error(`api ${res.status}`);
+  const json = await res.json();
+  if (!json?.contributions?.length) throw new Error("api empty");
+  return json;
+}
+
+async function loadContributions() {
+  for (const source of [fromGithub, fromApi]) {
+    try {
+      return await source();
+    } catch {
+      // try the next source
+    }
+  }
+  return snapshot; // last resort: committed snapshot
 }
 
 export default async function GithubContributions() {

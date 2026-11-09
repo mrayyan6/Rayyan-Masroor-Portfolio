@@ -15,7 +15,7 @@
 - Contributions panel: tooltip moved outside the scroll container (was clipped on top row); profile link is now a visible GitHub pill button. Count now shows 521 (private contributions enabled on GitHub).
 
 ## Contributions reliability (2026-11-09)
-- Panel showed "not available" because the browser fetched the slow (about 11s) third party API and failed. Now `components/GithubContributions.jsx` is a server component: fetches on the server with 6h revalidate, falls back to committed `data/contributions.json` snapshot if the API is down. Client panel moved to `GithubContributionsPanel.jsx` (still fetches client side only if no initial data). Refresh the snapshot occasionally by re-downloading the API URL into data/contributions.json.
+- Panel showed "not available" because the browser fetched the slow (about 11s) third party API and failed. Now `components/GithubContributions.jsx` is a server component: fetches GitHub's own public graph (github.com/users/mrayyan6/contributions, parsed, exact match with profile; the third party API lagged by 1 on today) with 1h revalidate, then the jogruber API, then the committed `data/contributions.json` snapshot if the API is down. Client panel moved to `GithubContributionsPanel.jsx` (still fetches client side only if no initial data). Refresh the snapshot occasionally by re-downloading the API URL into data/contributions.json.
 
 ## Resume auto sync
 - Source of truth: `C:\Users\rayya\OneDrive - FAST National University\RAYYAN MASROOR\stuff\Muhammad_Rayyan Resume.pdf`. Site serves `public/Muhammad_Rayyan_Resume.pdf`.
